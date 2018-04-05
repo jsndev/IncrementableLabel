@@ -54,14 +54,14 @@ public class IncrementableLabel: UILabel {
 
     // MARK: Private properties
 
-    private var timer: Timer?
-    private var fromValue: Double = 0.0
-    private var toValue: Double = 0.0
+    fileprivate var timer: Timer?
+    fileprivate var fromValue: Double = 0.0
+    fileprivate var toValue: Double = 0.0
 
-    private var duration: TimeInterval = 0.3
-    private var progress: TimeInterval = 0.0
-    private var lastUpdate: TimeInterval = 0.0
-    private var completion: Completion?
+    fileprivate var duration: TimeInterval = 0.3
+    fileprivate var progress: TimeInterval = 0.0
+    fileprivate var lastUpdate: TimeInterval = 0.0
+    fileprivate var completion: Completion?
 
     // MARK: Getter
 
@@ -104,7 +104,7 @@ extension IncrementableLabel {
 
 extension IncrementableLabel {
 
-    private func startIncrementation(fromValue: Double, toValue: Double, duration: Double) {
+    fileprivate func startIncrementation(fromValue: Double, toValue: Double, duration: Double) {
         self.fromValue = fromValue
         self.toValue = toValue
         self.duration = Double(duration)
@@ -137,7 +137,7 @@ extension IncrementableLabel {
         }
     }
 
-    private func updateText() {
+    fileprivate func updateText() {
         if let formatStringClosure = stringFormatter {
             text = formatStringClosure(currentValue)
         } else if let attributedTextClosure = attributedTextFormatter {
@@ -158,7 +158,7 @@ extension IncrementableLabel {
 
 extension IncrementableLabel {
 
-    private func nextValueForCurrentOption(value: Double) -> Double {
+    fileprivate func nextValueForCurrentOption(value: Double) -> Double {
         switch option {
         case .linear: return nextValueForLinearOption(value: value)
         case .easeIn: return nextValueForEaseInOption(value: value)
@@ -167,19 +167,19 @@ extension IncrementableLabel {
         }
     }
 
-    private func nextValueForLinearOption(value: Double) -> Double {
+    fileprivate func nextValueForLinearOption(value: Double) -> Double {
         return value
     }
 
-    private func nextValueForEaseInOption(value: Double) -> Double {
+    fileprivate func nextValueForEaseInOption(value: Double) -> Double {
         return Double(powf(Float(value), Float(easingRate)))
     }
 
-    private func nextValueForEaseOutOption(value: Double) -> Double {
+    fileprivate func nextValueForEaseOutOption(value: Double) -> Double {
         return 1.0 - Double(powf(1.0 - Float(value), Float(easingRate)))
     }
 
-    private func nextValueForEaseInOutOption(value: Double) -> Double {
+    fileprivate func nextValueForEaseInOutOption(value: Double) -> Double {
         var value = value
         let sign: Double = easingRate.truncatingRemainder(dividingBy: 2) == 0 ?  -1 : 1
         value *= 2
